@@ -1,0 +1,41 @@
+[gd_scene load_steps=2 format=3 uid="uid://fwicvjjre68k"]
+
+[ext_resource type="Script" path="res://Scripts/mainmenu.gd" id="1_3jf78"]
+
+[node name="mainmenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_3jf78")
+
+[node name="title" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 131.0
+offset_top = 21.0
+offset_right = 261.0
+offset_bottom = 52.0
+text = "insert title here"
+
+[node name="playButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 161.0
+offset_top = 65.0
+offset_right = 222.0
+offset_bottom = 100.0
+text = "play"
+
+[node name="instructions (remove me)" type="Label" parent="."]
+layout_mode = 0
+offset_left = 238.0
+offset_top = 155.0
+offset_right = 381.0
+offset_bottom = 213.0
+theme_override_font_sizes/font_size = 11
+text = "come up with a game title
+make a quit button
+maybe style it a bit"
+
+[connection signal="pressed" from="playButton" to="." method="_on_play_button_pressed"]
