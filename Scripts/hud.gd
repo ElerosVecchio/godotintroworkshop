@@ -4,7 +4,7 @@ extends Control
 
 func _ready():
 	var player = get_parent().get_node("Player")
-	# connect to the player's player_hurt signal
+	# connect set_health to the player's player_hurt signal
 
 func set_health(val):
-	healthbar.value = val * 100
+	# set health bar value to val * 100

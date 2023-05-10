@@ -21,6 +21,7 @@ func die():
 	queue_free()
 
 func _physics_process(delta):
+	# if you have time, add ghost states (idle, wander, chase)
 	if player != null:
 		var direction = (player.global_position - global_position).normalized()
 		velocity = velocity.move_toward(direction * 50, 200 * delta)
