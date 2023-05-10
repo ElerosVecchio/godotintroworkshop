@@ -1,10 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://dkqbfqcwyb4do"]
+[gd_scene load_steps=6 format=3 uid="uid://dkqbfqcwyb4do"]
 
 [ext_resource type="Texture2D" uid="uid://b5f8e1oxpu308" path="res://Assets/dungeon_tiles.png" id="1_8aywc"]
 [ext_resource type="Script" path="res://Scripts/knife.gd" id="1_bgmgd"]
+[ext_resource type="Script" path="res://Scripts/knifehitbox.gd" id="3_i6dld"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yp5j8"]
 size = Vector2(6, 11)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_152tc"]
+size = Vector2(8, 13)
 
 [node name="knife" type="CharacterBody2D"]
 script = ExtResource("1_bgmgd")
@@ -17,3 +21,14 @@ region_rect = Rect2(112, 129, 16, 16)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -0.5)
 shape = SubResource("RectangleShape2D_yp5j8")
+
+[node name="hitbox" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 8
+script = ExtResource("3_i6dld")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_152tc")
+
+[connection signal="area_entered" from="hitbox" to="." method="_on_hitbox_area_entered"]

@@ -8,20 +8,23 @@ var target_velocity: Vector2 = Vector2.ZERO
 @onready var dagger = preload("res://Scenes/knife.tscn")
 @onready var invulntimer = $invulntimer
 
-var max_health: float = 3.0
-var current_health: float = max_health
+@onready var audioplayer = preload("res://Scenes/sound.tscn")
+@onready var hurtsound = preload("res://Assets/sounds/footstep_snow_004.ogg")
+@onready var diesound = preload("res://Assets/sounds/footstep_snow_001.ogg")
+
 var invuln: bool = false
 
 # play with these values
 # see how it changes movement
 const SPEED: int = 150
 const ACCELERATION: int = 500
+var max_health: float = 3.0
+var current_health: float = max_health
 
 func _physics_process(delta):
 	var direction: Vector2 = Vector2.ZERO
 	
-	direction.x = Input.get_action_strength("right") - Input.get_action_strength("left")
-	direction.y = Input.get_action_strength("backward") - Input.get_action_strength("forward")
+	# set the x and y parts of direction using Input.get_action_strength
 	direction = direction.normalized()
 	
 	if direction != Vector2.ZERO:
@@ -38,14 +41,8 @@ func _input(event):
 	if event is InputEventKey:
 		if event.is_action_pressed("pause"):
 			get_tree().quit()
-		if event.is_action_pressed("attack_up"):
-			throw_dagger(Vector2.UP)
-		elif event.is_action_pressed("attack_down"):
-			throw_dagger(Vector2.DOWN)
-		elif event.is_action_pressed("attack_left"):
-			throw_dagger(Vector2.LEFT)
-		elif event.is_action_pressed("attack_right"):
-			throw_dagger(Vector2.RIGHT)
+		#check if the attack_dir actions have been pressed (Project > Project Settings > Input Map) for names
+		#if yes, throw dagger in that direction
 
 func throw_dagger(direction: Vector2):
 	var inst = dagger.instantiate()
@@ -58,13 +55,18 @@ func hurt():
 		return
 	invuln = true
 	invulntimer.start()
-	current_health -= 1
-	player_hurt.emit(current_health / max_health)
-	if current_health <= 0:
-		die()
+	var inst = audioplayer.instantiate()
+	get_tree().get_root().add_child(inst)
+	# reduce health
+	# then check if health is 0, call die
+	# also play sounds, use inst.play(soundname)
+	# emit the player hurt signal with current_health / max_health
 
 func die():
-	queue_free()
+	get_tree().reload_current_scene()
 
 func _on_invulntimer_timeout():
 	invuln = false
+
+func _on_hitbox_area_entered(_area):
+	hurt()

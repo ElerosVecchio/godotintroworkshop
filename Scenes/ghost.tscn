@@ -1,12 +1,56 @@
-[gd_scene load_steps=4 format=3 uid="uid://brcuwrnom1na"]
+[gd_scene load_steps=9 format=3 uid="uid://brcuwrnom1na"]
 
 [ext_resource type="Script" path="res://Scripts/ghost.gd" id="1_62dap"]
 [ext_resource type="Texture2D" uid="uid://b5f8e1oxpu308" path="res://Assets/dungeon_tiles.png" id="1_piyyv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7quvs"]
-size = Vector2(12, 15)
+size = Vector2(12, 5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ibxds"]
+size = Vector2(12, 14)
+
+[sub_resource type="Animation" id="Animation_8synp"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_q0amy"]
+resource_name = "float"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.5, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -1), Vector2(0, -2), Vector2(0, -1), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1alpk"]
+_data = {
+"RESET": SubResource("Animation_8synp"),
+"float": SubResource("Animation_q0amy")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nd2d2"]
+size = Vector2(10, 12)
 
 [node name="ghost" type="CharacterBody2D"]
+collision_layer = 32
 script = ExtResource("1_62dap")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -15,5 +59,29 @@ region_enabled = true
 region_rect = Rect2(16, 161, 16, 16)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 0.5)
+position = Vector2(0, 5.5)
 shape = SubResource("RectangleShape2D_7quvs")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_ibxds")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "float"
+libraries = {
+"": SubResource("AnimationLibrary_1alpk")
+}
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 64
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_nd2d2")
+
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]

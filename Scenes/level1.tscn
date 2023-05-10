@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://dl5f2cmlonbwx"]
+[gd_scene load_steps=7 format=3 uid="uid://dl5f2cmlonbwx"]
 
 [ext_resource type="PackedScene" uid="uid://cuofuijmnjivy" path="res://Scenes/player.tscn" id="1_7cudc"]
 [ext_resource type="TileSet" uid="uid://bhxjxuar2i5as" path="res://Assets/tileset.tres" id="2_a5hiy"]
 [ext_resource type="PackedScene" uid="uid://brcuwrnom1na" path="res://Scenes/ghost.tscn" id="3_lmidh"]
 [ext_resource type="PackedScene" uid="uid://drl5cdvoo4570" path="res://Scenes/hud.tscn" id="4_ft25x"]
+[ext_resource type="PackedScene" uid="uid://t7siwxnhfyqj" path="res://Scenes/exit.tscn" id="5_7sp10"]
+[ext_resource type="PackedScene" uid="uid://cgtp6ehro1iwi" path="res://Scenes/level2.tscn" id="6_40nbp"]
 
 [node name="level1" type="Node2D"]
 
@@ -19,6 +21,10 @@ layer_1/y_sort_enabled = false
 layer_1/y_sort_origin = 0
 layer_1/z_index = 0
 layer_1/tile_data = PackedInt32Array(393224, 0, 4, 458760, 0, 5, 458761, 65536, 5, 458762, 65536, 5, 458763, 65536, 5, 458764, 65536, 5, 458765, 65536, 5, 458766, 65536, 5, 393228, 196608, 4, 458767, 131072, 5, 393231, 131072, 4, 393230, 65536, 4, 393229, 65536, 4, 393227, 65536, 4, 393226, 65536, 4, 393225, 65536, 4, 524296, 0, 6, 524303, 196608, 6, 524301, 65536, 7, 524298, 0, 7, 524302, 0, 7, 524297, 65536, 6, 524299, 65536, 6, 524300, 65536, 6, 458769, 524288, 7, 524305, 524288, 8, 393219, 327680, 0, 196626, 327680, 0, 589845, 327680, 0, 786445, 327680, 0, 655364, 327680, 0, 262167, 458752, 1, 196631, 458752, 1, 131095, 458752, 1, 65559, 458752, 1, 23, 458752, 1, 22, 458752, 1, 65558, 458752, 1, 65557, 458752, 1, 131093, 458752, 1, 196629, 458752, 1, 196630, 458752, 1, 131094, 458752, 1, 327703, 458752, 2, 262166, 393216, 2, 262165, 458752, 2, 196628, 393216, 1, 131092, 393216, 1, 65556, 393216, 1, 21, 393216, 0)
+
+[node name="exit" parent="." instance=ExtResource("5_7sp10")]
+position = Vector2(358, 191)
+nextScene = ExtResource("6_40nbp")
 
 [node name="Player" parent="." instance=ExtResource("1_7cudc")]
 position = Vector2(93, 49)

@@ -2,7 +2,10 @@ extends CharacterBody2D
 
 const SPEED: int = 500
 
+@onready var hitbox = $hitbox
+
 func setup(direction: Vector2):
+	hitbox.knockback_vector = direction
 	match direction:
 		Vector2.UP:
 			rotation_degrees = 0
@@ -14,12 +17,12 @@ func setup(direction: Vector2):
 			rotation_degrees = 270
 	velocity = direction * SPEED
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	move_and_slide()
 	var collision = get_last_slide_collision()
 	if collision == null:
 		return
-	var collider = collision.get_collider()
-	if collider.has_method("hurt"):
-		collider.hurt()
+	queue_free()
+
+func _on_hitbox_area_entered(_area):
 	queue_free()
