@@ -14,11 +14,14 @@ var target_velocity: Vector2 = Vector2.ZERO
 
 var invuln: bool = false
 
+# export these variables so they show up in the inspector
 # play with these values
 # see how it changes movement
 const SPEED: int = 150
 const ACCELERATION: int = 500
 var max_health: float = 3.0
+
+# dont export or touch this one (or do i cant stop you)
 var current_health: float = max_health
 
 func _physics_process(delta):
@@ -60,7 +63,7 @@ func hurt():
 	# reduce health
 	# then check if health is 0, call die
 	# also play sounds, use inst.play(soundname)
-	# emit the player hurt signal with current_health / max_health
+	# emit the player hurt signal with current_health divided by max_health
 
 func die():
 	get_tree().reload_current_scene()

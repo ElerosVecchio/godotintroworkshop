@@ -1,8 +1,9 @@
 extends CharacterBody2D
 
-# bad bad never do this
-# do as i say not as i do
-@onready var player = get_parent().get_node("Player")
+# export a reference to the character
+# drag the Player node in the scene view to the 'Player' field in the ghost's inspector
+# dont hardcode a reference, its bad
+@export var player: CharacterBody2D
 
 var health: int = 2
 

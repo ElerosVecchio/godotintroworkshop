@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-const SPEED: int = 500
+@export var speed: int = 500
 
 @onready var hitbox = $hitbox
 
@@ -15,7 +15,7 @@ func setup(direction: Vector2):
 			rotation_degrees = 90
 		Vector2.LEFT:
 			rotation_degrees = 270
-	velocity = direction * SPEED
+	velocity = direction * speed
 
 func _physics_process(_delta):
 	move_and_slide()

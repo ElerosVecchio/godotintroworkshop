@@ -29,13 +29,24 @@ text = "play"
 
 [node name="instructions (remove me)" type="Label" parent="."]
 layout_mode = 0
-offset_left = 238.0
-offset_top = 155.0
-offset_right = 381.0
-offset_bottom = 213.0
+offset_left = 397.0
+offset_top = 7.0
+offset_right = 540.0
+offset_bottom = 219.0
 theme_override_font_sizes/font_size = 11
-text = "come up with a game title
+text = "main menu:
+come up with a game title
 make a quit button
-maybe style it a bit"
+maybe style menu a bit
+
+finish the following scripts:
+exit.gd
+ghost.gd
+hud.gd
+mainmenu.gd
+player.gd
+
+if you have time:
+make a second level!"
 
 [connection signal="pressed" from="playButton" to="." method="_on_play_button_pressed"]
