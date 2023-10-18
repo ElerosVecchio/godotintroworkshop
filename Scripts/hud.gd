@@ -7,4 +7,4 @@ func _ready():
 	# connect set_health to the player's player_hurt signal
 
 func set_health(val):
-	# set health bar value to val * 100
+	pass # set health bar value to val * 100
